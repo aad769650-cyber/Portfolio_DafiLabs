@@ -4,6 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "./Header/Header" 
 import  Footer  from "./Footer/Footer";
+import { Toaster } from 'sonner'
+
+
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
@@ -34,7 +37,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         
         <Header></Header>
-        
+                <Toaster richColors position="top-right" />
+
         {children}
         
         

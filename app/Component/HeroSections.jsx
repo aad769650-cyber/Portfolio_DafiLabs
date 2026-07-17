@@ -4,18 +4,16 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Github,
-  Linkedin,
-  Mail,
-  Twitter,
-  Download,
-  ArrowUpRight,
-  Sparkles,
-  ChevronDown,
-  Rocket,
-  GraduationCap,
-  Users,
-} from "lucide-react";
+  FiDownload,
+  FiArrowUpRight,
+  FiChevronDown,
+  FiUsers,
+  FiGithub,
+  FiLinkedin,
+  FiMail,
+  FiTwitter,
+} from "react-icons/fi";
+import { HiSparkles, HiRocketLaunch, HiAcademicCap } from "react-icons/hi2";
 import {
   SiReact,
   SiNextdotjs,
@@ -44,10 +42,10 @@ const ROLES = [
 ];
 
 const SOCIAL_LINKS = [
-  { label: "GitHub", href: "https://github.com/yourusername", icon: Github },
-  { label: "LinkedIn", href: "https://linkedin.com/in/yourusername", icon: Linkedin },
-  { label: "Email", href: "mailto:hello@mahar.dev", icon: Mail },
-  { label: "Twitter / X", href: "https://twitter.com/yourusername", icon: Twitter },
+  { label: "GitHub", href: "https://github.com/yourusername", icon: FiGithub },
+  { label: "LinkedIn", href: "https://linkedin.com/in/yourusername", icon: FiLinkedin },
+  { label: "Email", href: "mailto:hello@mahar.dev", icon: FiMail },
+  { label: "Twitter / X", href: "https://twitter.com/yourusername", icon: FiTwitter },
 ];
 
 const TECH_BADGES = [
@@ -63,10 +61,10 @@ const TECH_BADGES = [
 ];
 
 const ACHIEVEMENTS = [
-  { label: "Projects Completed", value: "20+", icon: Rocket, className: "-left-6 top-[8%]" },
-  { label: "Years of Learning", value: "3+", icon: GraduationCap, className: "-right-6 top-[36%]" },
-  { label: "Happy Clients", value: "15+", icon: Users, className: "-left-8 bottom-[18%]" },
-  { label: "GitHub Contributions", value: "500+", icon: Github, className: "-right-4 bottom-[-4%]" },
+  { label: "Projects Completed", value: "20+", icon: HiRocketLaunch, className: "-left-6 top-[8%]" },
+  { label: "Years of Learning", value: "3+", icon: HiAcademicCap, className: "-right-6 top-[36%]" },
+  { label: "Happy Clients", value: "15+", icon: FiUsers, className: "-left-8 bottom-[18%]" },
+  { label: "GitHub Contributions", value: "500+", icon: FiGithub, className: "-right-4 bottom-[-4%]" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -192,7 +190,7 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               Available for Work
-              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+              <HiSparkles className="h-3.5 w-3.5" aria-hidden="true" />
             </Badge>
           </motion.div>
 
@@ -232,7 +230,7 @@ export default function Hero() {
               className="group rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-6 py-6 text-sm font-medium text-white shadow-[0_0_25px_rgba(99,102,241,0.35)] transition-transform hover:scale-[1.03] hover:opacity-90 hover:shadow-[0_0_32px_rgba(99,102,241,0.5)]"
             >
               View Projects
-              <ArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <FiArrowUpRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Button>
 
             <Button
@@ -242,7 +240,7 @@ export default function Hero() {
             >
               <a href="/resume.pdf" download aria-label="Download resume">
                 Download Resume
-                <Download className="ml-1.5 h-4 w-4" />
+                <FiDownload className="ml-1.5 h-4 w-4" />
               </a>
             </Button>
           </motion.div>
@@ -375,7 +373,7 @@ export default function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-5 w-5" aria-hidden="true" />
+          <FiChevronDown className="h-5 w-5" aria-hidden="true" />
         </motion.span>
       </motion.button>
 
