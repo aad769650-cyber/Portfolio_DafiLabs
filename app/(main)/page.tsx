@@ -1,7 +1,7 @@
-import Hero from "./Component/HeroSections"
-import WhyChooseSection from "./Component/WhyChoose"
-import FAQSection from "./Component/FAQ"
-import SkillsSection from "./Component/Skills"
+import Hero from "./HeroSections"
+import WhyChooseSection from "./WhyChoose"
+import FAQSection from "./FAQ"
+import SkillsSection from "./Skills"
 export default function Home() {
   return (
     <>
