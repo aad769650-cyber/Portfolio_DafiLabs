@@ -414,7 +414,11 @@ function Sidebar({ open, onClose }) {
           <div className="mt-auto pt-6 border-t border-white/[0.06] relative">
             <Link
               href="/"
-              onClick={() => localStorage.removeItem("isAuth")}
+              onClick={() => {
+                if (typeof window !== "undefined") {
+                  localStorage.removeItem("isAuth");
+                }
+              }}
               className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-red-400 hover:text-white hover:bg-red-500/10 transition-all duration-200"
             >
               <LogOut className="h-4.5 w-4.5" strokeWidth={2} />
@@ -434,7 +438,9 @@ function Navbar({ onMenuClick, user }) {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem("isAuthenticate");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("isAuthenticate");
+    }
     router.push("/");
   };
 
