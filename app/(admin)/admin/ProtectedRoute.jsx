@@ -1,22 +1,27 @@
-"use client"
-import React from 'react'
-import {  useRouter } from "next/navigation";
+"use client";
 
-const ProtectedRoute = ({children}) => {
-const navigate=useRouter()
-    const isAuth=JSON.parse(localStorage.getItem("isAuthenticate"));
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
+const ProtectedRoute = ({ children }) => {
+  const router = useRouter();
+  const [isAuth, setIsAuth] = useState(null);
 
-console.log(isAuth,"inside");
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem("isAuthenticate"));
 
-if(isAuth){
-    return children
-}else{
-    console.log("navigating...");
-    
-    return navigate.push("/adminLogin")
-}
+    if (auth) {
+      setIsAuth(true);
+    } else {
+      router.replace("/adminLogin");
+    }
+  }, [router]);
 
-}
+  if (isAuth === null) {
+    return null; // or a loading spinner
+  }
 
-export default ProtectedRoute
+  return children;
+};
+
+export default ProtectedRoute;
