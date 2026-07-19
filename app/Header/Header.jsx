@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,9 +22,13 @@ const NAV_LINKS = [
   { label: "Projects", href: "projects" },
   { label: "Experience", href: "experience" },
   { label: "Contact", href: "contact" },
+  { label: "Admin", href: "admin" },
 ];
 
-const SECTION_IDS = NAV_LINKS.map((link) => link.href);
+// Only these are real in-page sections tracked by scroll spy
+const SECTION_IDS = NAV_LINKS.filter((l) => l.href !== "admin" && l.href !== "contact").map(
+  (link) => link.href
+);
 
 const listVariants = {
   hidden: {},
@@ -90,6 +95,7 @@ function useScrollSpy(sectionIds, offset = 100) {
 }
 
 export default function Header() {
+  const router = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeSection = useScrollSpy(SECTION_IDS, 120);
@@ -108,8 +114,32 @@ export default function Header() {
     window.scrollTo({ top, behavior: "smooth" });
   }, []);
 
+  // Route-based nav (Admin, Contact) vs in-page scroll for everything else
+  const handleNavClick = useCallback(
+    (id) => {
+      if (id === "admin") {
+        router.push("/admin");
+        return;
+      }
+      if (id === "contact") {
+        router.push("/contact");
+        return;
+      }
+      scrollToSection(id);
+    },
+    [router, scrollToSection]
+  );
+
   const handleMobileNavigate = (id) => {
     setMobileOpen(false);
+    if (id === "admin") {
+      router.push("/admin");
+      return;
+    }
+    if (id === "contact") {
+      router.push("/contact");
+      return;
+    }
     window.setTimeout(() => scrollToSection(id), 150);
   };
 
@@ -152,7 +182,7 @@ export default function Header() {
             return (
               <button
                 key={link.href}
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => handleNavClick(link.href)}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
@@ -176,7 +206,7 @@ export default function Header() {
         {/* CTA + mobile trigger */}
         <div className="flex items-center gap-2">
           <Button
-            onClick={() => scrollToSection("contact")}
+            onClick={() => router.push("/contact")}
             className="hidden rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 px-5 text-sm font-medium text-white shadow-[0_0_20px_rgba(99,102,241,0.35)] transition-transform hover:scale-[1.03] hover:opacity-90 hover:shadow-[0_0_28px_rgba(99,102,241,0.5)] md:inline-flex"
           >
             Let&apos;s Talk
@@ -263,7 +293,10 @@ export default function Header() {
 
               <div className="mt-8 border-t border-white/10 pt-6">
                 <Button
-                  onClick={() => handleMobileNavigate("contact")}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    router.push("/contact");
+                  }}
                   className="w-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-[0_0_20px_rgba(99,102,241,0.35)] hover:opacity-90"
                 >
                   Let&apos;s Talk

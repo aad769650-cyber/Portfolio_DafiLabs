@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Providers from "./providers";
 
 import { Toaster } from 'sonner'
 
@@ -35,11 +36,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         
-                <Toaster richColors position="top-right" />
-
-        {children}
-        
-        
+\
+     <Providers>
+          {children}
+          <Toaster richColors position="top-center" />
+        </Providers>
         </body>
     </html>
   );
